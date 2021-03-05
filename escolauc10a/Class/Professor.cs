@@ -18,6 +18,14 @@ namespace escolauc10a.Class
             Cpf = cpf;
             Telefone = telefone;
         }
+        public Professor(int id, string nome, string email, string cpf, string telefone)
+        {
+            Id = id;
+            Nome = nome;
+            Email = email;
+            Cpf = cpf;
+            Telefone = telefone;
+        }
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
@@ -62,6 +70,26 @@ namespace escolauc10a.Class
                 cmd.CommandText = "SELECT @@IDENTITY";
 
                 Id = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+        public void BuscarPorId(int id)
+        {
+            var cmd = Banco.Abrir();
+
+            if (cmd.Connection.State == ConnectionState.Open)
+            {
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT * FROM professor WHERE id = " + id;
+
+                var dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    Nome = dr.GetString(1);
+                    Cpf = dr.GetString(2);
+                    Email = dr.GetString(3);
+                    Telefone = dr.GetString(4);
+                }
             }
         }
     }

@@ -40,5 +40,10 @@ namespace escolauc10a.Forms
 
             txtId.Text = professor.Id.ToString();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
